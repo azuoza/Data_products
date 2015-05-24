@@ -1,26 +1,27 @@
 library(shiny)
 
-# Define UI for application that plots random distributions 
+# Define UI for miles per gallon application
 shinyUI(pageWithSidebar(
   
   # Application title
-  headerPanel("Hello Shiny!"),
+  headerPanel("Miles Per Gallon calculation on Motor Trend Car Road Tests data"),
   
-  # Sidebar with a slider input for number of observations
+  # Choosing variables for plot and analysis
   sidebarPanel(
-    sliderInput("obs", 
-                "Number of observations:", 
-                min = 1,
-                max = 1000, 
-                value = 500), 
     selectInput("variable", "Variable:",
                 list("Cylinders" = "cyl", 
                      "Transmission" = "am", 
-                     "Gears" = "gear"))
+                     "Gears" = "gear")),
+    
+    # for dispalying trend line 
+    checkboxInput("trend", "Trend line and some info", FALSE)
   ),
   
-  # Show a plot of the generated distribution
+  # Show the caption and plot of the requested variable against mpg
   mainPanel(
-    plotOutput("distPlot")
+    plotOutput("mpgPlot"),
+    h4(textOutput("regression"))
+    
+    
   )
 ))
